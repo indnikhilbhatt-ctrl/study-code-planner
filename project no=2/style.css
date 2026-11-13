@@ -1,0 +1,882 @@
+:root {
+    --bg: #f3f5fb;
+    --card: #fff;
+    --ink: #17203a;
+    --muted: #6c7692;
+    --line: #e1e5f2;
+    --acad: #3d6df2;
+    --code: #12b886;
+    --college: #f08c3a;
+    --rest: #9aa5c4;
+    --head: "Outfit", "Segoe UI", system-ui, sans-serif;
+    --body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #0e1222;
+        --card: #171c33;
+        --ink: #e8ebf8;
+        --muted: #97a1c2;
+        --line: #272e50;
+    }
+}
+
+:root[data-theme="dark"] {
+    --bg: #0e1222;
+    --card: #171c33;
+    --ink: #e8ebf8;
+    --muted: #97a1c2;
+    --line: #272e50;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html {
+    scroll-padding-top: env(safe-area-inset-top, 0px)
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.5
+}
+
+.wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: max(22px, env(safe-area-inset-top, 0px)) 18px max(60px, env(safe-area-inset-bottom, 0px))
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 22px
+}
+
+.day {
+    font-family: var(--head);
+    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.03em;
+    margin: 0
+}
+
+.date {
+    color: var(--muted);
+    margin: 6px 0 0
+}
+
+.chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end
+}
+
+.chip {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: .88rem;
+    white-space: nowrap
+}
+
+.chip b {
+    font-family: var(--head)
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px
+}
+
+h2 {
+    font-family: var(--head);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 14px
+}
+
+.ringbox {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap
+}
+
+.ring {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    flex: none
+}
+
+.ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg)
+}
+
+.ring circle {
+    fill: none;
+    stroke-width: 15;
+    stroke-linecap: round
+}
+
+.trk {
+    opacity: .18
+}
+
+.prog {
+    transition: stroke-dasharray .8s ease
+}
+
+.pct {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--head);
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1
+}
+
+.pct small {
+    font-size: .75rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 4px
+}
+
+.key {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: .92rem
+}
+
+.key li {
+    margin: 6px 0
+}
+
+.key i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px
+}
+
+.task {
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.status {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 600;
+    background: color-mix(in srgb, var(--college) 18%, var(--card));
+    color: var(--college)
+}
+
+.status.done {
+    background: color-mix(in srgb, var(--code) 18%, var(--card));
+    color: var(--code)
+}
+
+.task p {
+    font-family: var(--head);
+    font-size: 1.3rem;
+    line-height: 1.3;
+    margin: 14px 0 6px;
+    font-weight: 600
+}
+
+.task small {
+    color: var(--muted)
+}
+
+button {
+    font: inherit;
+    font-weight: 500;
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 18px;
+    background: var(--acad);
+    color: #fff;
+    cursor: pointer
+}
+
+button.ghost {
+    background: transparent;
+    color: var(--ink);
+    box-shadow: inset 0 0 0 1.5px var(--line)
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--acad);
+    outline-offset: 2px
+}
+
+.task button {
+    margin-top: auto;
+    align-self: flex-start
+}
+
+.seg {
+    display: inline-flex;
+    background: var(--bg);
+    border-radius: 999px;
+    padding: 4px;
+    margin-bottom: 16px;
+    flex-wrap: wrap
+}
+
+.seg button {
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 16px
+}
+
+.seg button.on {
+    background: var(--card);
+    color: var(--ink);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .12)
+}
+
+.schedule-editor {
+    margin: 0 0 16px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--bg)
+}
+
+.schedule-editor summary {
+    width: fit-content;
+    color: var(--acad);
+    font-weight: 600;
+    cursor: pointer
+}
+
+.editor-note,
+.schedule-message {
+    color: var(--muted);
+    font-size: .85rem;
+    margin: 10px 0
+}
+
+#scheduleFields {
+    display: grid;
+    gap: 10px
+}
+
+.schedule-edit-row {
+    display: grid;
+    grid-template-columns: minmax(130px, .8fr) minmax(180px, 1.5fr) minmax(130px, .8fr) auto;
+    align-items: end;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--card)
+}
+
+.schedule-edit-row label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: var(--muted);
+    font-size: .8rem
+}
+
+.schedule-edit-row input,
+.schedule-edit-row select {
+    width: 100%;
+    min-width: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--bg);
+    color: var(--ink);
+    font: inherit
+}
+
+.editor-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px
+}
+
+.schedule-message {
+    min-height: 1.3em;
+    margin-bottom: 0
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    position: relative;
+    margin-left: 5px;
+    padding-left: 22px;
+    border-left: 2px solid var(--line)
+}
+
+.row::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 16px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--line)
+}
+
+.row div {
+    padding: 8px 10px
+}
+
+.t {
+    color: var(--muted);
+    font-size: .9rem;
+    font-variant-numeric: tabular-nums
+}
+
+.w {
+    border-radius: 12px;
+    color: var(--muted)
+}
+
+.row.a::before {
+    background: var(--acad);
+    border-color: var(--acad)
+}
+
+.row.c::before {
+    background: var(--code);
+    border-color: var(--code)
+}
+
+.row.k::before {
+    background: var(--college);
+    border-color: var(--college)
+}
+
+.row.a .w {
+    background: color-mix(in srgb, var(--acad) 12%, var(--card));
+    color: var(--ink);
+    font-weight: 500
+}
+
+.row.c .w {
+    background: color-mix(in srgb, var(--code) 13%, var(--card));
+    color: var(--ink);
+    font-weight: 500
+}
+
+.row.k .w {
+    background: color-mix(in srgb, var(--college) 14%, var(--card));
+    color: var(--ink);
+    font-weight: 500
+}
+
+.row.now::after {
+    content: "Now";
+    position: absolute;
+    right: 0;
+    top: 8px;
+    font-size: .72rem;
+    font-weight: 600;
+    background: var(--ink);
+    color: var(--card);
+    border-radius: 999px;
+    padding: 1px 10px
+}
+
+.row.now .t {
+    color: var(--ink);
+    font-weight: 600
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: end;
+    margin-bottom: 18px
+}
+
+.form label {
+    display: flex;
+    flex-direction: column;
+    font-size: .8rem;
+    color: var(--muted);
+    gap: 4px
+}
+
+.form input {
+    font: inherit;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 10px;
+    width: 110px
+}
+
+.heat {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, 1fr);
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 4px
+}
+
+.cell {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    background: var(--line)
+}
+
+.cell.l1 {
+    background: color-mix(in srgb, var(--code) 30%, var(--card))
+}
+
+.cell.l2 {
+    background: color-mix(in srgb, var(--code) 62%, var(--card))
+}
+
+.cell.l3 {
+    background: var(--code)
+}
+
+.cell.r {
+    background: repeating-linear-gradient(45deg, var(--rest), var(--rest) 2px, var(--card) 2px, var(--card) 4px)
+}
+
+.cell.today {
+    outline: 2px solid var(--ink);
+    outline-offset: 1px
+}
+
+.cell.f {
+    visibility: hidden
+}
+
+.note {
+    color: var(--muted);
+    font-size: .85rem;
+    margin: 12px 0 0
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 18px
+}
+
+.stat {
+    background: var(--bg);
+    border-radius: 14px;
+    padding: 12px 14px
+}
+
+.stat b {
+    display: block;
+    font-family: var(--head);
+    font-size: 1.7rem;
+    line-height: 1.1
+}
+
+.stat small {
+    color: var(--muted)
+}
+
+@media (max-width:700px) {
+    .grid {
+        grid-template-columns: 1fr
+    }
+
+    .row {
+        grid-template-columns: 1fr
+    }
+
+    .row div {
+        padding: 4px 10px
+    }
+
+    .card {
+        padding: 18px
+    }
+
+    .schedule-edit-row {
+        grid-template-columns: 1fr
+    }
+
+    .remove-schedule-row {
+        justify-self: start
+    }
+}
+
+@media (prefers-reduced-motion:reduce) {
+    * {
+        transition: none !important
+    }
+}
+/* ===== EXTRA POLISH ===== */
+
+/* Soft glow behind the page */
+body {
+    background:
+        radial-gradient(60% 40% at 90% -5%, color-mix(in srgb, var(--acad) 14%, transparent), transparent 70%),
+        radial-gradient(50% 35% at 0% 0%, color-mix(in srgb, var(--code) 12%, transparent), transparent 70%),
+        var(--bg);
+    background-attachment: fixed;
+}
+
+::selection {
+    background: color-mix(in srgb, var(--acad) 30%, transparent);
+}
+
+/* Cards: gentle depth and a lift on hover */
+.card {
+    box-shadow: 0 1px 2px rgba(23, 32, 58, .04), 0 8px 24px rgba(23, 32, 58, .06);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 2px 4px rgba(23, 32, 58, .05), 0 16px 36px rgba(23, 32, 58, .1);
+}
+
+/* Colored top edge on the two main cards */
+.grid .card {
+    position: relative;
+    overflow: hidden;
+}
+
+.grid .card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--acad), var(--code));
+}
+
+/* Big day name gets a gradient fill */
+.day {
+    background: linear-gradient(120deg, var(--ink) 30%, var(--acad));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Rings glow in their own color */
+#ra {
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--acad) 55%, transparent));
+}
+
+#rc {
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--code) 55%, transparent));
+}
+
+/* Buttons */
+button {
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--acad) 30%, transparent);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+button:active {
+    transform: translateY(0) scale(.98);
+}
+
+button.ghost {
+    box-shadow: inset 0 0 0 1.5px var(--line);
+}
+
+.seg button,
+.seg button.on {
+    box-shadow: none;
+}
+
+.seg button.on {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .12);
+}
+
+/* Chips */
+.chip {
+    box-shadow: 0 2px 8px rgba(23, 32, 58, .05);
+}
+
+#streak::before {
+    content: "🔥 ";
+}
+
+/* Timetable rows: hover highlight, pulsing dot on the current slot */
+.row {
+    transition: background .2s ease;
+    border-radius: 0 12px 12px 0;
+}
+
+.row:hover .w {
+    transform: translateX(3px);
+}
+
+.w {
+    transition: transform .2s ease;
+}
+
+.row.now .w {
+    box-shadow: 0 0 0 2px var(--ink);
+}
+
+.row.now::before {
+    animation: pulse 1.8s ease-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--acad) 55%, transparent);
+    }
+
+    100% {
+        box-shadow: 0 0 0 10px transparent;
+    }
+}
+
+/* Heat calendar squares */
+.cell {
+    transition: transform .15s ease;
+}
+
+.cell:hover {
+    transform: scale(1.4);
+}
+
+/* Stat tiles */
+.stat {
+    transition: transform .2s ease;
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+}
+
+.stat b {
+    background: linear-gradient(120deg, var(--acad), var(--code));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Inputs */
+.form input {
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.form input:focus {
+    border-color: var(--acad);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--acad) 18%, transparent);
+    outline: none;
+}
+
+/* Pending / done badge */
+.status::before {
+    content: "● ";
+    font-size: .7em;
+}
+
+/* Slim scrollbar for the heat calendar */
+.heat::-webkit-scrollbar {
+    height: 6px;
+}
+
+.heat::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 6px;
+}
+
+/* One page-load reveal (the only automatic animation) */
+.wrap {
+    animation: rise .6s ease both;
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .wrap,
+    .row.now::before {
+        animation: none;
+    }
+
+    .card:hover,
+    button:hover,
+    .stat:hover,
+    .cell:hover {
+        transform: none;
+    }
+}
+/* ===== STRONG "NOW" HIGHLIGHT ===== */
+.row.now {
+    border-left-color: var(--code);
+}
+
+.row.now .w {
+    background: linear-gradient(120deg, var(--acad), var(--code));
+    color: #fff;
+    font-weight: 600;
+    outline: none;
+    transform: scale(1.02);
+    transform-origin: left center;
+    box-shadow: 0 10px 26px color-mix(in srgb, var(--acad) 40%, transparent);
+}
+
+.row.now .t {
+    color: var(--acad);
+    font-weight: 700;
+}
+
+/* bigger, pulsing dot on the timeline */
+.row.now::before {
+    width: 18px;
+    height: 18px;
+    left: -10px;
+    top: 13px;
+    background: var(--code);
+    border: 3px solid var(--card);
+    animation: nowpulse 1.6s ease-out infinite;
+}
+
+@keyframes nowpulse {
+    0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--code) 70%, transparent);
+    }
+
+    100% {
+        box-shadow: 0 0 0 14px transparent;
+    }
+}
+
+/* NOW badge sits on the top edge of the block */
+.row.now::after {
+    content: "● NOW";
+    top: -9px;
+    right: 14px;
+    background: var(--code);
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    padding: 3px 12px;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--code) 50%, transparent);
+    z-index: 2;
+}
+
+/* fade the other rows so the current one pops */
+#tt.has-now .row:not(.now) {
+    opacity: .55;
+    transition: opacity .2s ease;
+}
+
+#tt.has-now .row:not(.now):hover {
+    opacity: 1;
+}
+
+/* "Right now" banner above the timetable */
+#nowbar:empty {
+    display: none;
+}
+
+#nowbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 12px 18px;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--code) 14%, var(--card));
+    border: 1.5px solid var(--code);
+}
+
+#nowbar b {
+    font-family: var(--head);
+    color: var(--code);
+    white-space: nowrap;
+}
+
+.nb-dot {
+    flex: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--code);
+    animation: nowpulse 1.6s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .row.now::before,
+    .nb-dot {
+        animation: none;
+    }
+}

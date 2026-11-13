@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Study &amp; Code Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Outfit:wght@300;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1 class="day" id="dow"></h1><p class="date" id="dt"></p></div>
+    <div class="chips"><span class="chip" id="streak"></span><span class="chip" id="wk"></span><span class="chip" id="exam"></span></div>
+  </header>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Today’s progress</h2>
+      <div class="ringbox">
+        <div class="ring" role="img" aria-label="Daily goal progress ring">
+          <svg viewBox="0 0 200 200">
+            <circle class="trk" cx="100" cy="100" r="84" stroke="var(--acad)"/>
+            <circle class="prog" id="ra" cx="100" cy="100" r="84" stroke="var(--acad)" pathLength="100" stroke-dasharray="0 100"/>
+            <circle class="trk" cx="100" cy="100" r="61" stroke="var(--code)"/>
+            <circle class="prog" id="rc" cx="100" cy="100" r="61" stroke="var(--code)" pathLength="100" stroke-dasharray="0 100"/>
+          </svg>
+          <div class="pct"><span id="pc">0%</span><small>of daily goal</small></div>
+        </div>
+        <ul class="key" id="key"></ul>
+      </div>
+    </section>
+    <section class="card task" id="taskCard"></section>
+  </div>
+
+  <section class="card" style="margin-bottom:16px">
+    <h2>My timetable</h2>
+    <div class="seg" id="seg"></div>
+    <details class="schedule-editor" id="scheduleEditor" ontoggle="if (this.open) drawScheduleEditor()">
+      <summary>Edit this timetable</summary>
+      <p class="editor-note">Changes are saved in this browser only, so each friend can customize their own timetable. Save before switching schedules or closing the editor.</p>
+      <div id="scheduleFields"></div>
+      <div class="editor-actions">
+        <button type="button" class="ghost" onclick="addScheduleRow()">Add item</button>
+        <button type="button" onclick="saveSchedule()">Save timetable</button>
+        <button type="button" class="ghost" onclick="restoreScheduleDefaults()">Restore defaults</button>
+      </div>
+      <p id="scheduleMessage" class="schedule-message" role="status" aria-live="polite"></p>
+    </details>
+    <div id="nowbar" aria-live="polite"></div>
+    <div id="tt"></div>
+  </section>
+
+  <section class="card">
+    <h2>Log today</h2>
+    <form class="form" id="logForm" onsubmit="logToday(event)">
+      <label>Academic hours<input type="number" id="ia" min="0" max="24" step="0.5" value="0"></label>
+      <label>Coding hours<input type="number" id="ic" min="0" max="24" step="0.5" value="0"></label>
+      <label>Problems solved<input type="number" id="ip" min="0" step="1" value="0"></label>
+      <label>Daily goal (hours)<input type="number" id="ig" min="1" max="24" step="0.5" required></label>
+      <button type="submit">Save today</button>
+      <button class="ghost" type="button" onclick="restDay()">Take a rest day</button>
+    </form>
+    <div class="stats" id="stats"></div>
+    <h2>Last 12 weeks</h2>
+    <div class="heat" id="heat"></div>
+    <p class="note">Darker green means more hours. Striped squares are rest days. A day keeps your streak alive once you log at least 30 minutes, or take a rest day (one per week).</p>
+  </section>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
